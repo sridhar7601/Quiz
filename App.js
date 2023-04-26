@@ -5,7 +5,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 export default function App() {
   return (
     <View style={styles.container}>
-<<<<<<< HEAD
       <LinearGradient
         colors={['#f731db', '#4600f1']}
         start={{ x: 0, y: 1 }}
@@ -21,10 +20,6 @@ export default function App() {
       </LinearGradient>
       {/* <TouchableOpacity style={styles.button}>
       </TouchableOpacity> */}
-=======
-      <Text>Open up App.js to start working on your app!ft</Text>
-      <StatusBar style="auto" />
->>>>>>> master
     </View>
   );
 }

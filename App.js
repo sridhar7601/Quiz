@@ -50,36 +50,42 @@ const Cards = () => {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    axios.get('https://api.example.com/cards').then((response) => {
-      setCards(response.data);
-    });
+    // Fetch data from API
+    axios
+      .get('http://localhost:8080/publish/getp/1')
+      .then((response) => {
+        setCards(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   return (
     <ScrollView>
-      {cards.map((card, index) => (
-        <View key={index} style={styles.contentContainer}>
-          <LinearGradient
-            colors={['#f731db', '#4600f1']}
-            start={{ x: 0, y: 1 }}
-            end={{ x: 1, y: 1 }}
-            style={styles.card}>
-            <Text style={styles.heading}>{card.heading}</Text>
-            {card.subheadings.map((subheading, index) => (
-              <Text key={index} style={styles.subheading}>
-                {subheading}
-              </Text>
-            ))}
-          </LinearGradient>
-          <View style={styles.scrollContent}>
-            {Array.from({ length: 50 }).map((_, index) => (
-              <Text key={index} style={styles.scrollText}>
-                Scrollable Content {index + 1}
-              </Text>
-            ))}
+      {cards.length === 0 ? (
+        <Text>Loading...</Text> // or display a loading spinner
+      ) : (
+        cards.map((card, index) => (
+          <View key={index} style={styles.contentContainer}>
+            <LinearGradient
+              colors={['#f731db', '#4600f1']}
+              start={{ x: 0, y: 1 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.card}>
+              <Text style={styles.heading}>{card.title}</Text>
+              <Text style={styles.subheading}>{card.questions}</Text>
+            </LinearGradient>
+            {/* <View style={styles.scrollContent}>
+              {Array.from({ length: 50 }).map((_, index) => (
+                <Text key={index} style={styles.scrollText}>
+                  Scrollable Content {index + 1}
+                </Text>
+              ))}
+            </View> */}
           </View>
-        </View>
-      ))}
+        ))
+      )}
     </ScrollView>
   );
 };
